@@ -24,7 +24,7 @@ const Component = ({ projects }) => {
           </Item>
         ))}
       </Listing>
-      <Button>Add</Button>
+      <ButtonAdd>Add</ButtonAdd>
     </>
   );
 };
@@ -48,6 +48,10 @@ const Item = styled(ListItem)`
 
 const Actions = styled.div`
   margin-left: auto;
+`
+
+const ButtonAdd = styled(Button)`
+  margin-top: 15px !important;
 `
 
 export default Component;
