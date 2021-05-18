@@ -12,4 +12,10 @@ export default class {
 
     return service.getAll();
   };
+
+  deleteOne = (id) => {
+    const service = new ProjectsService();
+
+    return service.deleteOne(id);
+  }
 }

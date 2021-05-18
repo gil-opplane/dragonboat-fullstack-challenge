@@ -6,7 +6,7 @@ import Button from "@material-ui/core/Button";
 import ListItem from "@material-ui/core/ListItem";
 import Typography from "@material-ui/core/Typography";
 
-const Component = ({ projects }) => {
+const Component = ({ projects, deleteProject }) => {
   const [hovering, setHovering] = useState(undefined);
   return (
     <>
@@ -18,7 +18,7 @@ const Component = ({ projects }) => {
             {hovering === p.id && (
               <Actions>
                 <Button>Edit</Button>
-                <Button>Delete</Button>
+                <Button onClick={() => deleteProject(p.id)}>Delete</Button>
               </Actions>
             )}
           </Item>

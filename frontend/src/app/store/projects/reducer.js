@@ -1,4 +1,4 @@
-import { FETCH_PROJECT, FETCH_PROJECTS } from "./types";
+import {DELETE_PROJECT, FETCH_PROJECT, FETCH_PROJECTS} from "./types";
 
 const initialState = {
   byId: {},
@@ -26,6 +26,20 @@ const reducer = (state = initialState, action) => {
           ...state.byId,
           [data.id]: data,
         },
+      };
+    }
+    case DELETE_PROJECT: {
+      const {data,id} = action.payload;
+
+      if (!data) return state;
+
+      const byId = Object.assign({}, state.byId);
+      delete byId[id];
+
+      return {
+        ...state,
+        byId,
+        ids: state.ids.filter((_id) => _id !== id),
       };
     }
     default: {
