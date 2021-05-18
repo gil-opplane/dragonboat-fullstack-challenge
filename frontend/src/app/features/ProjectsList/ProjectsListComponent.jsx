@@ -6,7 +6,7 @@ import Button from "@material-ui/core/Button";
 import ListItem from "@material-ui/core/ListItem";
 import Typography from "@material-ui/core/Typography";
 
-const Component = ({ projects, deleteProject }) => {
+const Component = ({ projects, deleteProject, addProject }) => {
   const [hovering, setHovering] = useState(undefined);
   return (
     <>
@@ -24,7 +24,7 @@ const Component = ({ projects, deleteProject }) => {
           </Item>
         ))}
       </Listing>
-      <ButtonAdd>Add</ButtonAdd>
+      <ButtonAdd onClick={() => addProject({author: 'aaa', title: 'aaa', start_date: new Date().toISOString(), end_date: new Date().toISOString() })}>Add</ButtonAdd>
     </>
   );
 };

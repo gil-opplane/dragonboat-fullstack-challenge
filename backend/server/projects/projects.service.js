@@ -2,6 +2,7 @@ import Projects from "db/projects";
 import Service from "../utils/Service";
 
 import ObjectDoesNotExistError from "../utils/exceptions/ObjectDoesNotExistError";
+import RequirementsNotMetError from "../utils/exceptions/RequirementsNotMetError";
 
 export default class extends Service {
   getOne = (id) => {
@@ -17,5 +18,12 @@ export default class extends Service {
 
   deleteOne = (id) => {
     return Projects.deleteOne(id);
+  }
+
+  createOne = (body) => {
+    if (!body.title || !body.author || !body.start_date || !body.end_date)
+      throw new RequirementsNotMetError();
+
+    return Projects.createOne(body);
   }
 }

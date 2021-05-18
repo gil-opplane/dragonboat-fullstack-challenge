@@ -18,4 +18,10 @@ export default class {
 
     return service.deleteOne(id);
   }
+
+  createOne = (body) => {
+    const service = new ProjectsService();
+
+    return service.createOne(body);
+  }
 }

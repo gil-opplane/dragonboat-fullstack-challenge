@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import {FETCH_PROJECTS, FETCH_PROJECT, DELETE_PROJECT} from "./types";
+import {FETCH_PROJECTS, FETCH_PROJECT, DELETE_PROJECT, ADD_PROJECT} from "./types";
 
 export const fetchProjects = () => {
   return async (dispatch) =>
@@ -28,3 +28,11 @@ export const deleteProject = (id) => {
       })),
     });
 };
+
+export const addProject = (body) => {
+  return async (dispatch) =>
+    dispatch({
+      type: ADD_PROJECT,
+      payload: await axios.post(`/projects`, body).then((data) => data.data)
+    })
+}

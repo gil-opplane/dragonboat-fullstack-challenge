@@ -38,6 +38,16 @@ export default class extends RestControllerMixin(ProjectsController) {
       }
     })
 
+    router.post("/", async (req, res, next) => {
+      try {
+        const created = await this.createOne(req.body);
+
+        return res.status(200).send(created);
+      } catch (err) {
+        next(err);
+      }
+    })
+
     this.router = router;
   }
 }

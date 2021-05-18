@@ -1,35 +1,36 @@
 // This model mocks a real database model for the sake com simplicity
-let data = [
+let idCounter = 0
+const data = [
   {
-    id: 1,
+    id: ++idCounter,
     title: "Project 1",
     author: "Gil Neto",
     start_date: '2021-05-16T09:00:00.000Z',
     end_date: '2021-05-19T18:00:00.000Z'
   },
   {
-    id: 2,
+    id: ++idCounter,
     title: "Project 2",
     author: "Gil Neto",
     start_date: '2021-05-16T09:00:00.000Z',
     end_date: '2021-05-19T18:00:00.000Z'
   },
   {
-    id: 3,
+    id: ++idCounter,
     title: "Project 3",
     author: "Gil Neto",
     start_date: '2021-05-16T09:00:00.000Z',
     end_date: '2021-05-19T18:00:00.000Z'
   },
   {
-    id: 4,
+    id: ++idCounter,
     title: "Project 4",
     author: "Gil Neto",
     start_date: '2021-05-16T09:00:00.000Z',
     end_date: '2021-05-19T18:00:00.000Z'
   },
   {
-    id: 5,
+    id: ++idCounter,
     title: "Project 5",
     author: "Gil Neto",
     start_date: '2021-05-16T09:00:00.000Z',
@@ -63,6 +64,15 @@ export default class {
     const index = data.findIndex((curr) => curr.id === id);
     data.splice(index,1);
     return true;
+  }
+
+  static createOne = (body) => {
+    const newProject = {
+      id: ++idCounter,
+      ...body
+    };
+    data.push(newProject)
+    return newProject;
   }
   // You can add more methods to this mock to extend its functionality or
   // rewrite it to use any kind of database system (eg. mongo, postgres, etc.)
