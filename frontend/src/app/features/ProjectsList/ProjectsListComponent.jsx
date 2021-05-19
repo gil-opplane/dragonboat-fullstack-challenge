@@ -5,16 +5,24 @@ import List from "@material-ui/core/List";
 import Button from "@material-ui/core/Button";
 import ListItem from "@material-ui/core/ListItem";
 import Typography from "@material-ui/core/Typography";
+import Chip from "@material-ui/core/Chip";
 
 const Component = ({ projects, deleteProject, addProject }) => {
   const [hovering, setHovering] = useState(undefined);
+  const dateOptions = {weekday: 'long', year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+  const format = (d) =>  new Date(d).toLocaleDateString('en-UK', dateOptions)
   return (
     <>
       <Title variant="h4">Projects List</Title>
       <Listing>
         {projects.map((p) => (
           <Item key={p.id} onMouseEnter={() => setHovering(p.id)} onMouseLeave={() => setHovering(undefined)}>
-            {p.title}
+            <div>
+              <Typography variant={'body1'} display={'block'}>{p.title}</Typography>
+              <Author variant={'caption'} display={'block'} gutterBottom>{p.author}</Author>
+              <Chip color={"primary"} size={'small'} label={format(p.start_date)} variant={'outlined'} />
+              <Chip color={"secondary"}  size={'small'} label={format(p.start_date)} variant={'outlined'} />
+            </div>
             {hovering === p.id && (
               <Actions>
                 <Button>Edit</Button>
@@ -32,6 +40,10 @@ const Component = ({ projects, deleteProject, addProject }) => {
 const Title = styled(Typography)`
   padding: 20px 0 20px 13px;
 `;
+
+const Author = styled(Typography)`
+  font-size: 10px !important;
+`
 
 const Listing = styled(List)`
   overflow-x: hidden;
