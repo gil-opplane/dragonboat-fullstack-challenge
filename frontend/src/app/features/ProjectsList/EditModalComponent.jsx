@@ -10,7 +10,6 @@ import MomentUtils from '@date-io/moment';
 const moment = require('moment');
 
 const EditModalComponent = ({ project, open, onClose, onSave }) => {
-  console.log('start', project);
   const [title, setTitle] = useState(undefined);
   const [startDate, setStartDate] = useState(undefined);
   const [endDate, setEndDate] = useState(undefined);
@@ -19,12 +18,11 @@ const EditModalComponent = ({ project, open, onClose, onSave }) => {
     setTitle(project.title);
     setStartDate(moment(project.start_date));
     setEndDate(moment(project.end_date));
-  }, []);
+  }, [project]);
 
   const save = (e) => {
     e.preventDefault();
     const data = { title, start_date: startDate.format(), end_date: endDate.format() };
-    console.log(data);
     onSave(data);
   }
 

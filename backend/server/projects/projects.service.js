@@ -26,4 +26,11 @@ export default class extends Service {
 
     return Projects.createOne(body);
   }
+
+  updateOne = (id, body) => {
+    if (!body.title || !body.start_date || !body.end_date)
+      throw new RequirementsNotMetError();
+
+    return Projects.updateOne(id, body);
+  }
 }

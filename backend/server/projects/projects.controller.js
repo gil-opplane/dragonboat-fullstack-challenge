@@ -24,4 +24,10 @@ export default class {
 
     return service.createOne(body);
   }
+
+  updateOne = (id, body) => {
+    const service = new ProjectsService();
+
+    return service.updateOne(id, body);
+  }
 }

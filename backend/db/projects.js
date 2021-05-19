@@ -74,6 +74,18 @@ export default class {
     data.push(newProject)
     return newProject;
   }
+
+  static updateOne = (id, body) => {
+    let updatedObj = undefined;
+    data.map(obj => {
+      if (obj.id === id) {
+        updatedObj = {...obj, ...body}
+        return updatedObj;
+      }
+      else return obj
+    });
+    return updatedObj;
+  }
   // You can add more methods to this mock to extend its functionality or
   // rewrite it to use any kind of database system (eg. mongo, postgres, etc.)
   // it is not part of the evaluation process

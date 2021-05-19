@@ -8,12 +8,11 @@ import Typography from "@material-ui/core/Typography";
 import Chip from "@material-ui/core/Chip";
 import EditModalComponent from "./EditModalComponent";
 
-const Component = ({ projects, deleteProject, addProject }) => {
+const Component = ({ projects, deleteProject, addProject, updateProject }) => {
   const [hovering, setHovering] = useState(undefined);
   const [open, setOpen] = useState(false);
   const [current, setCurrent] = useState(undefined);
   const dateOptions = {weekday: 'long', year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' };
-
 
   const format = (d) =>  new Date(d).toLocaleDateString('en-UK', dateOptions)
 
@@ -27,6 +26,11 @@ const Component = ({ projects, deleteProject, addProject }) => {
     setCurrent(undefined);
   }
 
+  const handleSave = (id, data) => {
+    updateProject(id, data);
+    handleClose();
+  }
+
   return (
     <>
       <Title variant="h4">Projects List</Title>
@@ -37,7 +41,7 @@ const Component = ({ projects, deleteProject, addProject }) => {
               <Typography variant={'body1'} display={'block'}>{p.title}</Typography>
               <Author variant={'caption'} display={'block'} gutterBottom>{p.author}</Author>
               <Chip color={"primary"} size={'small'} label={format(p.start_date)} variant={'outlined'} />
-              <Chip color={"secondary"}  size={'small'} label={format(p.start_date)} variant={'outlined'} />
+              <Chip color={"secondary"}  size={'small'} label={format(p.end_date)} variant={'outlined'} />
             </div>
             {hovering === p.id && (
               <Actions>
@@ -49,7 +53,7 @@ const Component = ({ projects, deleteProject, addProject }) => {
         ))}
       </Listing>
       <ButtonAdd onClick={() => addProject({author: 'aaa', title: 'aaa', start_date: new Date().toISOString(), end_date: new Date().toISOString() })}>Add</ButtonAdd>
-      {current && <EditModalComponent project={current} open={open} onClose={handleClose} onSave={console.log}/>}
+      {current && <EditModalComponent project={current} open={open} onClose={handleClose} onSave={(data) => handleSave(current.id, data)}/>}
     </>
   );
 };

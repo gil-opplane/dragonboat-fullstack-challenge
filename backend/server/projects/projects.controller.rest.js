@@ -48,6 +48,16 @@ export default class extends RestControllerMixin(ProjectsController) {
       }
     })
 
+    router.put("/:id", async (req, res, next) => {
+      try {
+        const updated = await this.updateOne(+req.params.id, req.body);
+
+        return res.status(200).send(updated);
+      } catch (err) {
+        next(err);
+      }
+    })
+
     this.router = router;
   }
 }

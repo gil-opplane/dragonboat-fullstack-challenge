@@ -1,4 +1,4 @@
-import {ADD_PROJECT, DELETE_PROJECT, FETCH_PROJECT, FETCH_PROJECTS} from "./types";
+import {ADD_PROJECT, DELETE_PROJECT, FETCH_PROJECT, FETCH_PROJECTS, UPDATE_PROJECT} from "./types";
 
 const initialState = {
   byId: {},
@@ -55,6 +55,19 @@ const reducer = (state = initialState, action) => {
         byId,
         ids: state.ids.concat(data.id)
       };
+    }
+    case UPDATE_PROJECT: {
+      const data = action.payload;
+
+      if (!data) return state;
+
+      const byId = Object.assign({}, state.byId);
+      byId[data.id] = data;
+
+      return {
+        ...state,
+        byId
+      }
     }
     default: {
       return state;
